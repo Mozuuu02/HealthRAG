@@ -2,3 +2,5 @@ streamlit
 sentence-transformers
 chromadb
 networkx
+pysqlite3-binary
+PyPDF2
