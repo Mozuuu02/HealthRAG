@@ -4,3 +4,4 @@ chromadb
 networkx
 pysqlite3-binary
 PyPDF2
+nltk
