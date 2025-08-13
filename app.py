@@ -1,6 +1,9 @@
+# ===== Fix for Chroma SQLite issue on Streamlit Cloud =====
 import sys
 import pysqlite3
 sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+
+# ===== Imports =====
 import streamlit as st
 from sentence_transformers import SentenceTransformer
 import chromadb
@@ -9,10 +12,22 @@ import PyPDF2
 import time
 import nltk
 from nltk.tokenize import sent_tokenize
+import re
+
+# ===== Ensure NLTK resources are available =====
+def ensure_nltk_data():
+    try:
+        nltk.data.find('tokenizers/punkt')
+    except LookupError:
+        nltk.download('punkt', quiet=True)
+
+    try:
+        nltk.data.find('tokenizers/punkt_tab')
+    except LookupError:
+        nltk.download('punkt_tab', quiet=True)
 
 # ===== PDF helper functions =====
 def extract_text_from_pdf(pdf_path):
-    import re
     text = ""
     with open(pdf_path, "rb") as f:
         reader = PyPDF2.PdfReader(f)
@@ -20,16 +35,13 @@ def extract_text_from_pdf(pdf_path):
             page_text = page.extract_text()
             if page_text:
                 text += page_text + " "
+    # Clean up text: remove extra spaces and fix hyphenation
     text = re.sub(r"\s+", " ", text)
     text = re.sub(r"(\w+)-\s+(\w+)", r"\1\2", text)
     return text
 
 def chunk_text(text, sentences_per_chunk=5):
-    try:
-        nltk.data.find('tokenizers/punkt')
-    except LookupError:
-        nltk.download('punkt', quiet=True)
-    
+    ensure_nltk_data()
     sentences = sent_tokenize(text)
     chunks = []
     for i in range(0, len(sentences), sentences_per_chunk):
