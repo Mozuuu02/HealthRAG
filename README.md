@@ -1,4 +1,5 @@
-HealthRAG 🧠📄
+HealthRAG 🧠📄 @https://healthrag-new.streamlit.app/
+
 
 A smart Q&A app that answers using hybrid retrieval: vector embeddings + knowledge graph.
 
