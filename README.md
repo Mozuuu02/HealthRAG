@@ -1,13 +1,11 @@
 HealthRAG 🧠📄
 
-A smart Q&A app that answers your questions from PDFs using hybrid retrieval: vector embeddings + knowledge graph.
+A smart Q&A app that answers using hybrid retrieval: vector embeddings + knowledge graph.
 
 ⚡ Demo
 Wait for the progress bar while the PDF is processed, then ask your question!
-Input box hides while processing and after submitting.
 
 🛠 Features
-📄 Extract and clean text from PDFs
 
 🧠 Chunk large documents for better retrieval
 
@@ -19,7 +17,6 @@ Input box hides while processing and after submitting.
 
 ⏳ Progress bar during processing
 
-🔄 Reset to ask new questions
 
 
 
